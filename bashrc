@@ -107,7 +107,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
-# My defined functions.
+# My defined functions
+
+# for leetcode directory command
 leetcode() {
 	re='^[0-9]+$'
 	push='(?i)push'
@@ -131,7 +133,12 @@ leetcode() {
 		fi
 	fi
 }
-	
+
+# for editing bashrc on repo directory and sourcing it to the actual bashrc
+bashrc() {
+	cp ~/Personal/bashrc/bashrc ~/.bashrc
+	source ~/.bashrc
+}
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
