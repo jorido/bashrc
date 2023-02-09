@@ -111,9 +111,8 @@ fi
 
 # for leetcode directory command
 leetcode() {
-	re='^[0-9]+$'
-	push='(?i)push'
-	if [[ $1 =~ $re ]]; then
+	nums='^[0-9]+$'
+	if [[ $1 =~ $nums ]]; then
 		mkdir "$1"
 		cd "$1"
 		touch "note.txt"
@@ -124,9 +123,7 @@ leetcode() {
 			if [ -z "$2" ]; then
 				echo "Commit message required as a second argument"
 			else
-				git add .
-				git commit -m "$2"
-				git push
+				push "$2"
 			fi
 		else
 			echo "Invalid commad"
@@ -136,8 +133,25 @@ leetcode() {
 
 # for editing bashrc on repo directory and sourcing it to the actual bashrc
 bashrc() {
-	cp ~/Personal/bashrc/bashrc ~/.bashrc
-	source ~/.bashrc
+	if  [ -z $1 ]; then
+		cp ~/Personal/bashrc/bashrc ~/.bashrc
+		source ~/.bashrc
+	else
+		if [[ ${1,,} =~ 'push' ]]; then
+			if [ -z "$2" ]; then
+				echo "Commit message required as a second argument"
+			else
+				push "$2"
+			fi
+		fi
+	fi
+}
+
+
+push() {
+	git add .
+	git commit -m "$1"
+	git push
 }
 
 # enable programmable completion features (you don't need to enable
